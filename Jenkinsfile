@@ -1,13 +1,7 @@
 pipeline {
     agent any
 
-    stages {
-        stage('w/o container') {
-            steps {
-                echo 'Without any container technology'
-            }
-        }
-
+    stages {  
         stage('with Podman') {
             steps {
                 script {
@@ -18,7 +12,10 @@ pipeline {
                     // Sostituisci 'node:slim' con l'immagine che desideri utilizzare
                     // e 'npm --version' con i comandi che vuoi eseguire all'interno del container.
                     // Il comando 'podman run --rm' assicura che il container venga rimosso dopo l'esecuzione.
-                    sh 'podman run --rm node:slim npm --version'
+                     sh 'podman run node:slim npm --version'
+                     sh 'npm ci'
+                     sh 'npm run build'
+                     sh 'ls -la'
 
                     // Esempio più complesso: esecuzione di comandi multipli o persistenza dei dati (se necessario)
                     // sh '''
